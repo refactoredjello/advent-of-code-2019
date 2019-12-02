@@ -14,16 +14,16 @@ class ProgramState:
         val_loc = self.int_codes[idx]
         return self.int_codes[val_loc]
 
-    def set_value(self, idx, val):
+    def _set_value(self, idx, val):
         self.int_codes[idx] = val
 
     def add(self, a, b, set_idx):
         val = a + b
-        self.set_value(set_idx, val)
+        self._set_value(set_idx, val)
 
     def multiply(self, a, b, set_idx):
         val = a * b
-        self.set_value(set_idx, val)
+        self._set_value(set_idx, val)
 
     # Set state to "1202 program alarm"
     def set_inputs(self, noun, verb):
@@ -52,6 +52,8 @@ def run_program(state):
         b = state.get_value(idx + 2)
         store_loc = state.int_codes[idx + 3]
         handler(a, b, store_loc)
+
+
 ##
 # Part 1
 ##
@@ -61,7 +63,9 @@ def part_1():
     s.set_inputs(12, 2)
     return run_program(s)
 
+
 print(f"Part 1 answer {part_1()}")
+
 
 ##
 # Part 2
